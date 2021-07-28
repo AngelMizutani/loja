@@ -96,6 +96,13 @@
 	        </div>
 	
 	        <div class="container" id="cadastro">
+	        
+	        <form action ="/administrativo/funcionarios/validarCpf" method="post">
+				<label for="cpf">CPF</label>
+		        <input type="text" name="cpf" data-mask="###.###.###-##"/> <input type="submit" value="validarCpf"/>                        	                        	               
+	        </form>
+	        <span th:text="'CPF ' + ${cpfValido}"></span>
+	        
 	            <form action="/administrativo/funcionarios/salvar" th:object="${funcionario}" method="POST">
 	                <div class="form-row">
 	                    <div class="form-group col-md-6">
@@ -151,6 +158,7 @@
 	                        <div class="invalid-feedback">
 	
 	                        </div>
+		                    
 	                    </div>
 	                </div>
 	                <div class="form-row">
