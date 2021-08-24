@@ -4,12 +4,13 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<title>Loja Virtual com Spring MVC Spring Boot</title>
-	<meta charset="UTF-8" />
+	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="description" content="" />
 	<meta name="author" content="" />
 	<link rel="icon" href="/image/favicon.png" />
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 
 	<!-- Bootstrap core CSS -->
 	<link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
@@ -35,15 +36,25 @@
 	<div class="layout-main">	
 	
 		<aside>
-			<nav class="sidebar sidebar-open">
+			<nav class="sidebar sidebar-open" style="height: 1300px">
 				<ul class="nav nav-pills">
 					<li class="nav-item"><a class="nav-link " href="/"> <i
 							class="oi oi-home"></i> <span>Home</span>
 					</a></li>
 				</ul>
+				
+				<ul class="nav nav-pills">
+					<li class="nav-item"><span class="nav-link active">Entrada de Produtos</span></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="/administrativo/entrada/cadastrar"> <i class="oi oi-plus"></i> <span>Cadastrar </span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="/administrativo/entrada/listar"> <i class="oi oi-spreadsheet"></i> <span>Listar </span>
+					</a></li>
+				</ul>
 
 				<ul class="nav nav-pills">
-					<li class="nav-item"><span class="nav-link active">Usuários</span></li>
+					<li class="nav-item"><span class="nav-link active">Funcionários</span></li>
 					<li class="nav-item"><a class="nav-link" 
 						href="/administrativo/funcionarios/cadastrar"> <i class="oi oi-plus"></i> <span>Cadastrar </span>
 					</a></li>
@@ -51,6 +62,38 @@
 						href="/administrativo/funcionarios/listar"> <i class="oi oi-spreadsheet"></i> <span>Listar </span>
 					</a></li>
 				</ul>
+				
+				<ul class="nav nav-pills">
+					<li class="nav-item"><span class="nav-link active">Estados</span></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="/administrativo/estados/cadastrar"> <i class="oi oi-plus"></i> <span>Cadastrar </span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="/administrativo/estados/listar"> <i class="oi oi-spreadsheet"></i> <span>Listar </span>
+					</a></li>
+				</ul>
+				
+				<ul class="nav nav-pills">
+					<li class="nav-item"><span class="nav-link active">Cidades</span></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="/administrativo/cidades/cadastrar"> <i class="oi oi-plus"></i> <span>Cadastrar </span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="/administrativo/cidades/listar"> <i class="oi oi-spreadsheet"></i> <span>Listar </span>
+					</a></li>
+				</ul>
+				
+				<ul class="nav nav-pills">
+					<li class="nav-item"><span class="nav-link active">Produtos</span></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="/administrativo/produtos/cadastrar"> <i class="oi oi-plus"></i> <span>Cadastrar </span>
+					</a></li>
+					<li class="nav-item"><a class="nav-link" 
+						href="/administrativo/produtos/listar"> <i class="oi oi-spreadsheet"></i> <span>Listar </span>
+					</a></li>
+				</ul>
+				
+				
 			</nav>
 		</aside>
 			

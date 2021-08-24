@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -37,7 +38,9 @@ public class Funcionario implements Serializable{
 	@Temporal(TemporalType.DATE)
 	private Date dataSaida;
 	private String cargo;
-	private String cidade;
+	
+	@ManyToOne
+	private Cidade cidade;
 	private String logradouro;
 	private String numero;
 	private String complemento;
@@ -80,10 +83,10 @@ public class Funcionario implements Serializable{
 	public void setCargo(String cargo) {
 		this.cargo = cargo;
 	}
-	public String getCidade() {
+	public Cidade getCidade() {
 		return cidade;
 	}
-	public void setCidade(String cidade) {
+	public void setCidade(Cidade cidade) {
 		this.cidade = cidade;
 	}
 	public String getLogradouro() {
