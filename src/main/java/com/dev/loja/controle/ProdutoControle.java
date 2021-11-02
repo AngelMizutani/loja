@@ -44,6 +44,27 @@ public class ProdutoControle {
 		mv.addObject("listaProdutos", produtoRepositorio.findAll());
 		return mv;
 	}
+
+	@PostMapping("/administrativo/produtos/buscarDescricao")
+	public ModelAndView buscarPorDescricao(@RequestParam("buscar_descricao") String descricao){
+		ModelAndView mv = new ModelAndView("/administrativo/produtos/lista");
+		mv.addObject("listaProdutos", produtoRepositorio.findByDescricaoContaining(descricao));
+		return mv;
+	}
+
+	@PostMapping("/administrativo/produtos/buscarCategoria")
+	public ModelAndView buscarPorCategoria(@RequestParam("buscar_categoria") String categoria){
+		ModelAndView mv = new ModelAndView("/administrativo/produtos/lista");
+		mv.addObject("listaProdutos", produtoRepositorio.findByCategoriaContaining(categoria));
+		return mv;
+	}
+
+	@PostMapping("/administrativo/produtos/buscarMarca")
+	public ModelAndView buscarPorMarca(@RequestParam("buscar_marca") String marca){
+		ModelAndView mv = new ModelAndView("/administrativo/produtos/lista");
+		mv.addObject("listaProdutos", produtoRepositorio.findByMarcaContaining(marca));
+		return mv;
+	}
 	
 	@GetMapping("/administrativo/produtos/editar/{id}")
 	public ModelAndView editar(@PathVariable("id") Long id) {
