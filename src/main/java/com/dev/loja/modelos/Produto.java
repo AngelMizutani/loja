@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,8 +32,12 @@ public class Produto implements Serializable{
 	
 	private String descricao;
 	private Double valorVenda;
-	private String categoria;
-	private String marca;
+	
+	@ManyToOne
+	private Categoria categoria;
+
+	@ManyToOne
+	private Marca marca;
 	private Double quantidadeEstoque = 0.0;
 	private String nomeImagem;
 	
@@ -53,16 +59,17 @@ public class Produto implements Serializable{
 	public void setValorVenda(Double valorVenda) {
 		this.valorVenda = valorVenda;
 	}
-	public String getCategoria() {
+
+	public Categoria getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(String categoria) {
+	public void setCategoria(Categoria categoria) {
 		this.categoria = categoria;
 	}
-	public String getMarca() {
+	public Marca getMarca() {
 		return marca;
 	}
-	public void setMarca(String marca) {
+	public void setMarca(Marca marca) {
 		this.marca = marca;
 	}
 	public Double getQuantidadeEstoque() {
