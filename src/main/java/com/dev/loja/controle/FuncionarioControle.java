@@ -5,6 +5,7 @@ import java.util.Optional;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,9 +56,12 @@ public class FuncionarioControle {
 	
 	@PostMapping("/administrativo/funcionarios/salvar")
 	public ModelAndView salvar(@Valid Funcionario funcionario, BindingResult result) {
+		
 		if(result.hasErrors()) {
 			return cadastrar(funcionario);
 		}
+
+		funcionario.setSenha(new BCryptPasswordEncoder().encode(funcionario.getSenha()));
 		
 		funcionarioRepositorio.saveAndFlush(funcionario);
 		return cadastrar(new Funcionario());
