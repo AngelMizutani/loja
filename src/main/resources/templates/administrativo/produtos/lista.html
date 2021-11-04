@@ -21,6 +21,54 @@
 			</div>
 		</nav>
 
+		<div class="container" id="buscar_descricao">
+			<form action="/administrativo/produtos/buscarDescricao" th:object="${produto}" method="post">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="buscar_descricao">Buscar por Descrição</label>
+						<input type="text" class="form-control" name="buscar_descricao" id="buscar_descricao" 
+								placeholder="Descrição"/>
+						<button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+						
+						<div class="invalid-feedback">
+						</div>
+					</div>
+				</div>	
+			</form>
+		</div>
+
+		<div class="container" id="buscar_categoria">
+			<form action="/administrativo/produtos/buscarCategoria" th:object="${produto}" method="post">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="buscar_categoria">Buscar por Categoria</label>
+						<input type="text" class="form-control" name="buscar_categoria" id="buscar_categoria" 
+								placeholder="Categoria"/>
+						<button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+						
+						<div class="invalid-feedback">
+						</div>
+					</div>
+				</div>	
+			</form>
+		</div>
+		
+		<div class="container" id="buscar_marca">
+			<form action="/administrativo/produtos/buscarMarca" th:object="${produto}" method="post">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="buscar_marca">Buscar por Marca</label>
+						<input type="text" class="form-control" name="buscar_marca" id="buscar_marca" 
+								placeholder="marca"/>
+						<button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+						
+						<div class="invalid-feedback">
+						</div>
+					</div>
+				</div>	
+			</form>
+		</div>
+
 		<div class="container">
 
 			<div class="table-responsive">

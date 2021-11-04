@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Optional;
 
+import javax.sound.sampled.Line;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.dev.loja.modelos.Categoria;
+import com.dev.loja.modelos.Marca;
 import com.dev.loja.modelos.Produto;
 import com.dev.loja.repositorios.CategoriaRepositorio;
 import com.dev.loja.repositorios.MarcaRepositorio;
@@ -52,6 +56,29 @@ public class ProdutoControle {
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("/administrativo/produtos/lista");
 		mv.addObject("listaProdutos", produtoRepositorio.findAll());
+		return mv;
+	}
+
+	@PostMapping("/administrativo/produtos/buscarDescricao")
+	public ModelAndView buscarPorDescricao(@RequestParam("buscar_descricao") String descricao){
+		ModelAndView mv = new ModelAndView("/administrativo/produtos/lista");
+		mv.addObject("listaProdutos", produtoRepositorio.findByDescricaoContaining(descricao));
+		return mv;
+	}
+
+	@PostMapping("/administrativo/produtos/buscarCategoria")
+	public ModelAndView buscarPorCategoria(@RequestParam("buscar_categoria") String categoria){
+		ModelAndView mv = new ModelAndView("/administrativo/produtos/lista");
+		Optional<Categoria> opCategoria = categoriaRepositorio.findByNomeContaining(categoria);
+		mv.addObject("listaProdutos", produtoRepositorio.findByCategoria(opCategoria));
+		return mv;
+	}
+
+	@PostMapping("/administrativo/produtos/buscarMarca")
+	public ModelAndView buscarPorMarca(@RequestParam("buscar_marca") String marca){
+		ModelAndView mv = new ModelAndView("/administrativo/produtos/lista");
+		Optional<Marca> opMarca = marcaRepositorio.findByNomeContaining(marca);
+		mv.addObject("listaProdutos", produtoRepositorio.findByMarca(opMarca));
 		return mv;
 	}
 	
