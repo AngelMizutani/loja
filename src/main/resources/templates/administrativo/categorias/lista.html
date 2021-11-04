@@ -2,7 +2,7 @@
 <html xmlns:layout="http://www.w3.org/1999/xhtml"
 	layout:decorate="~{administrativo/fragments/layout}">
 <head>
-<title>Página Lista de Produtos da Loja Virtual</title>
+<title>Página Lista de Categorias da Loja Virtual</title>
 <meta charset="utf-8" />
 </head>
 <body>
@@ -12,11 +12,11 @@
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
-						<span>Lista de Produtos</span></li>
+						<span>Lista de Categorias</span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" href="/administrativo/entrada/produtos/cadastrar"
+				<a class="btn btn-primary btn-md" href="/administrativo/categorias/cadastrar"
 					role="button"> <span class="oi oi-plus" title="Cadastro"
-					aria-hidden="true"></span> <span>Cadastrar Produto</span>
+					aria-hidden="true"></span> <span>Cadastrar Categoria</span>
 				</a>
 			</div>
 		</nav>
@@ -28,38 +28,33 @@
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>Descrição</th>
-							<th>Quantidade em Estoque</th>
-							<th>Valor de Venda</th>
-							<th>Imagem</th>
+							<th>Nome</th>
+							<th>Ação</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="produto : ${listaProdutos}">
-							<td th:text="${produto.id}"></td>
-							<td th:text="${produto.descricao}"></td>
-							<td th:text="${produto.quantidadeEstoque}"></td>
-							<td th:text="${produto.valorVenda}"></td>
-							<td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width=100/></td>
+						<tr th:each="categoria : ${listaCategorias}">
+							<td th:text="${categoria.id}"></td>
+							<td th:text="${categoria.nome}"></td>
 
 							<td colspan="2"><a class="btn btn-info btn-sm"
-								th:href="@{/administrativo/entrada/produtos/editar/{id}(id=${produto.id})}"
+								th:href="@{/administrativo/categorias/editar/{id}(id=${categoria.id})}"
 								role="button"> <span class="oi oi-brush" title="Editar"
 									aria-hidden="true"></span>
 							</a> 
 							
 							<a class="btn btn-info btn-sm" data-toggle="modal"
 								data-target="#modal-warning"
-								th:attr="data-target='#modal-warning'+${produto.id }"><span
+								th:attr="data-target='#modal-warning'+${categoria.id }"><span
 									class="oi oi-circle-x" title="Remover" aria-hidden="true"></span></a>
 							
 
 								<div class="modal modal-warning fade in"
-									th:id="modal-warning+${produto.id}">
+									th:id="modal-warning+${categoria.id}">
 									<div class="modal-dialog">
 										<div class="modal-content">
 											<div class="modal-header">
-											<h5 class="modal-title">Remover Produto</h5>
+											<h5 class="modal-title">Remover Categoria</h5>
 												<button type="button" class="close" data-dismiss="modal"
 													aria-label="Fechar">
 													<span aria-hidden="true">×</span>
@@ -67,13 +62,13 @@
 												
 											</div>
 											<div class="modal-body">
-												<h3>Deseja realmente remover o Produto?</h3>
+												<h3>Deseja realmente remover o Categoria?</h3>
 											</div>
 											<div class="modal-footer">
 												<button type="button" class="btn btn-outline pull-left"
 													data-dismiss="modal">Fechar</button>
 												<a type="button" class="btn btn-outline"
-													th:href="@{/administrativo/entrada/produtos/remover/{id}(id=${produto.id})}"><i
+													th:href="@{/administrativo/categorias/remover/{id}(id=${categoria.id})}"><i
 													class="fa fa-check"></i>&nbsp;Sim</a>
 											</div>
 										</div>

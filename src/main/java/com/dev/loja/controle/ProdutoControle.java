@@ -21,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.loja.modelos.Produto;
+import com.dev.loja.repositorios.CategoriaRepositorio;
+import com.dev.loja.repositorios.MarcaRepositorio;
 import com.dev.loja.repositorios.ProdutoRepositorio;
 
 @Controller
@@ -30,28 +32,36 @@ public class ProdutoControle {
 	
 	@Autowired
 	private ProdutoRepositorio produtoRepositorio;
+
+	@Autowired
+	private CategoriaRepositorio categoriaRepositorio;
+
+	@Autowired
+	private MarcaRepositorio marcaRepositorio;
 	
-	@GetMapping("/administrativo/produtos/cadastrar")
+	@GetMapping("/administrativo/entrada/produtos/cadastrar")
 	public ModelAndView cadastrar(Produto produto) {
 		ModelAndView mv = new ModelAndView("/administrativo/produtos/cadastro");
 		mv.addObject("produto", produto);
+		mv.addObject("listaCategorias", categoriaRepositorio.findAll());
+		mv.addObject("listaMarcas", marcaRepositorio.findAll());
 		return mv;
 	}
 	
-	@GetMapping("/administrativo/produtos/listar")
+	@GetMapping("/administrativo/entrada/produtos/listar")
 	public ModelAndView listar() {
 		ModelAndView mv = new ModelAndView("/administrativo/produtos/lista");
 		mv.addObject("listaProdutos", produtoRepositorio.findAll());
 		return mv;
 	}
 	
-	@GetMapping("/administrativo/produtos/editar/{id}")
+	@GetMapping("/administrativo/entrada/produtos/editar/{id}")
 	public ModelAndView editar(@PathVariable("id") Long id) {
 		Optional<Produto> produto = produtoRepositorio.findById(id);
 		return cadastrar(produto.get());
 	}
 	
-	@GetMapping("/administrativo/produtos/remover/{id}")
+	@GetMapping("/administrativo/entrada/produtos/remover/{id}")
 	public ModelAndView remover(@PathVariable("id") Long id) {
 		Optional<Produto> produto = produtoRepositorio.findById(id);
 		produtoRepositorio.delete(produto.get());
@@ -68,7 +78,7 @@ public class ProdutoControle {
 		return null;
 	}
 	
-	@PostMapping("/administrativo/produtos/salvar")
+	@PostMapping("/administrativo/entrada/produtos/salvar")
 	public ModelAndView salvar(@Valid Produto produto, BindingResult result, @RequestParam("file") MultipartFile arquivo) {
 		if(result.hasErrors()) {
 			return cadastrar(produto);
