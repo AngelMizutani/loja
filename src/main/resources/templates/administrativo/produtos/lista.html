@@ -83,7 +83,7 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="produto : ${listaProdutos}">
+						<tr th:each="produto : ${listaProdutos.page}">
 							<td th:text="${produto.id}"></td>
 							<td th:text="${produto.descricao}"></td>
 							<td th:text="${produto.quantidadeEstoque}"></td>
@@ -132,6 +132,28 @@
 					</tbody>
 				</table>
 			</div>
+
+			<nav aria-label="Page navigation" class="paging">
+				<ul class="pagination" th:if="${listaProdutos.page.totalPages > 1}">
+					<li class="page-item" th:classappend = "${!listaProdutos.paging.isPrevEnabled()? 'disabled' : ''}">
+						<a class="page-link" th:href="@{'/administrativo/entrada/produtos/listarPag/?pageNumber=' + ${listaProdutos.paging.pageNumber - 1}}"
+							tabindex="-1">Previous</a>
+					</li>
+					<th:block th:each="item : ${listaProdutos.paging.getItems()}">
+						<li class="page-item" th:classappend="${item.index == listaProdutos.paging.pageNumber? 'active' : ''}"
+							th:if="${item.pageItemType.name() == 'PAGE'}">
+							<a class="page-link" th:href="@{'/administrativo/entrada/produtos/listarPag/?pageNumber=' + ${item.index}}"
+								th:text="${item.index}"></a>
+						</li>
+						<li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+							<a class="page-link" href="#">...</a>
+						</li>
+					</th:block>
+					<li class="page-item" th:classappend="${!listaProdutos.paging.isNextEnabled() ? 'disabled' : ''}">
+						<a class="page-link" th:href="@{'/administrativo/entrada/produtos/listarPag/?pageNumber=' + ${listaProdutos.paging.pageNumber + 1}}">Next</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</section>
 
