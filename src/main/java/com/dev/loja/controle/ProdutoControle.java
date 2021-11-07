@@ -25,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.loja.modelos.Categoria;
+import com.dev.loja.modelos.Imagem;
 import com.dev.loja.modelos.Marca;
 import com.dev.loja.modelos.Produto;
 import com.dev.loja.repositorios.CategoriaRepositorio;
@@ -139,7 +140,7 @@ public class ProdutoControle {
 	}
 	
 	@PostMapping("/administrativo/entrada/produtos/salvar")
-	public ModelAndView salvar(@Valid Produto produto, BindingResult result, @RequestParam("file") MultipartFile arquivo) {
+	public ModelAndView salvar(@Valid Produto produto, BindingResult result, @RequestParam("files") MultipartFile[] arquivos) {
 		if(result.hasErrors()) {
 			return cadastrar(produto);
 		}
@@ -147,13 +148,19 @@ public class ProdutoControle {
 		produtoRepositorio.saveAndFlush(produto);
 		
 		try {
-			if (!arquivo.isEmpty()) {
-				byte[] bytes = arquivo.getBytes();
-				Path caminho = Paths.get(caminhoImagens + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
-				Files.write(caminho, bytes);
-				
-				produto.setNomeImagem(String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
-				produtoRepositorio.saveAndFlush(produto);
+			if (arquivos.length > 0) {
+				for (MultipartFile arquivo : arquivos){
+					byte[] bytes = arquivo.getBytes();
+					Path caminho = Paths.get(caminhoImagens + String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
+					Files.write(caminho, bytes);
+	
+					Imagem imagem = new Imagem();
+					imagem.setNome(String.valueOf(produto.getId()) + arquivo.getOriginalFilename());
+	
+					produto.addImagem(imagem);
+					
+					produtoRepositorio.saveAndFlush(produto);
+				}				
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
