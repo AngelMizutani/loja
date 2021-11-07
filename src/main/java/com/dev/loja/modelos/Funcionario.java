@@ -50,7 +50,26 @@ public class Funcionario implements Serializable{
 	private String email;
 	private String senha;
 	private String cpf;
+
+	private String codigoRecuperacao;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataCodigo;
 	
+	public String getCodigoRecuperacao() {
+		return codigoRecuperacao;
+	}
+
+	public void setCodigoRecuperacao(String codigoRecuperacao) {
+		this.codigoRecuperacao = codigoRecuperacao;
+	}
+	
+	public Date getDataCodigo() {
+		return dataCodigo;
+	}
+	public void setDataCodigo(Date dataCodigo) {
+		this.dataCodigo = dataCodigo;
+	}
 	public String getCpf() {
 		return cpf;
 	}

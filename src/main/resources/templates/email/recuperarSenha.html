@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Recuperação de Senha</title>
+    </head>
+
+    <body>
+        <div class="container" style="padding: 20px">
+            <form method="post" action="/solicitarCodigo">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="email" 
+                            name="email"
+                            placeholder="Email">
+                </div>
+                <button type="submit" class="btn btn-primary">Recuperar Senha</button>
+            </form>
+            <br/>
+            <p id="resultado"></p>
+        </div>
+    </body>
+</html>

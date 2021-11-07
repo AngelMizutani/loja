@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Alterar Senha</title>
+    </head>
+
+    <body>
+        <div class="container" style="padding: 20px">
+            <form method="post" action="/alterarSenha">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="email" 
+                            name="email"
+                            placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="codigoRecuperacao">Código</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="codigoRecuperacao" 
+                            name="codigoRecuperacao"
+                            placeholder="Código de Recuperação">
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="senha" 
+                            name="senha"
+                            placeholder="Senha">
+                </div>
+                <button type="submit" class="btn btn-primary">Alterar Senha</button>
+            </form>
+            <br/>
+            <p id="resultado"></p>
+        </div>
+    </body>
+</html>
