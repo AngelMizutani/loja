@@ -1,8 +1,11 @@
 package com.dev.loja.modelos;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -39,8 +42,18 @@ public class Produto implements Serializable{
 	@ManyToOne
 	private Marca marca;
 	private Double quantidadeEstoque = 0.0;
-	private String nomeImagem;
-	
+
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
+	private List<Imagem> imagens = new ArrayList<>();
+
+	// private String nomeImagem;
+
+	// public String getNomeImagem() {
+	// 	return nomeImagem;
+	// }
+	// public void setNomeImagem(String nomeImagem) {
+	// 	this.nomeImagem = nomeImagem;
+	// }
 	public Long getId() {
 		return id;
 	}
@@ -78,12 +91,18 @@ public class Produto implements Serializable{
 	public void setQuantidadeEstoque(Double quantidadeEstoque) {
 		this.quantidadeEstoque = quantidadeEstoque;
 	}
-	public String getNomeImagem() {
-		return nomeImagem;
+
+	public List<Imagem> getImagens() {
+		return this.imagens;
 	}
-	public void setNomeImagem(String nomeImagem) {
-		this.nomeImagem = nomeImagem;
+
+	public void setImagens(List<Imagem> imagens) {
+		this.imagens = imagens;
 	}
-	
+
+	public void addImagem(Imagem imagem){
+		this.imagens.add(imagem);
+		imagem.setProduto(this);
+	}
 	
 }
