@@ -36,9 +36,10 @@
 	                        </div>
 	                    </div>
 	                    <div class="form-group col-md-6">
-	                        <label for="salario">Salário Bruto</label>
-	                        <input type="text" class="form-control" id="salario" data-mask="#.###,00"
-	                               data-mask-reverse="true" th:field="*{salarioBruto}" value=""/>
+	                        <label for="cpf">CPF</label>
+	                        <input type="text" class="form-control" id="cpf" data-mask="###.###.###-##"
+	                               data-mask-reverse="true" th:field="*{cpf}" value="validarCpf"/>
+
 	                        <div class="invalid-feedback">
 	
 	                        </div>
@@ -77,6 +78,14 @@
 	                            <option value="10">Coordenador de RH</option>
 	                            <option value="11">Psicologo</option>
 	                        </select>
+	                        <div class="invalid-feedback">
+	
+	                        </div>
+	                    </div>
+						<div class="form-group col-md-6">
+	                        <label for="salario">Salário Bruto</label>
+	                        <input type="text" class="form-control" id="salario" data-mask="#.###,00"
+	                               data-mask-reverse="true" th:field="*{salarioBruto}" value=""/>
 	                        <div class="invalid-feedback">
 	
 	                        </div>

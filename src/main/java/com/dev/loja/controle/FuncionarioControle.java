@@ -11,11 +11,13 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.dev.loja.modelos.Funcionario;
 import com.dev.loja.repositorios.CidadeRepositorio;
 import com.dev.loja.repositorios.FuncionarioRepositorio;
+import com.dev.loja.util.ValidarCpf;
 
 @Controller
 public class FuncionarioControle {
@@ -56,8 +58,10 @@ public class FuncionarioControle {
 	
 	@PostMapping("/administrativo/funcionarios/salvar")
 	public ModelAndView salvar(@Valid Funcionario funcionario, BindingResult result) {
+
+		boolean cpfValido = validarCpf(funcionario.getCpf());
 		
-		if(result.hasErrors()) {
+		if(result.hasErrors() || (cpfValido == false)) {
 			return cadastrar(funcionario);
 		}
 
@@ -65,6 +69,15 @@ public class FuncionarioControle {
 		
 		funcionarioRepositorio.saveAndFlush(funcionario);
 		return cadastrar(new Funcionario());
+	}
+
+	public Boolean validarCpf(String cpf) {
+		Boolean cpfValido = false;
+		if(ValidarCpf.isCPF(cpf)) {
+			cpfValido = true;
+		}
+
+		return cpfValido;
 	}
 
 }

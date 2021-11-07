@@ -14,12 +14,60 @@
 					<li class="nav-item active"><i class="oi oi-caret-right"></i>
 						<span>Lista de Produtos</span></li>
 				</ul>
-				<a class="btn btn-primary btn-md" href="/administrativo/produtos/cadastrar"
+				<a class="btn btn-primary btn-md" href="/administrativo/entrada/produtos/cadastrar"
 					role="button"> <span class="oi oi-plus" title="Cadastro"
 					aria-hidden="true"></span> <span>Cadastrar Produto</span>
 				</a>
 			</div>
 		</nav>
+
+		<div class="container" id="buscar_descricao">
+			<form action="/administrativo/produtos/buscarDescricao" th:object="${produto}" method="post">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="buscar_descricao">Buscar por Descrição</label>
+						<input type="text" class="form-control" name="buscar_descricao" id="buscar_descricao" 
+								placeholder="Descrição"/>
+						<button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+						
+						<div class="invalid-feedback">
+						</div>
+					</div>
+				</div>	
+			</form>
+		</div>
+
+		<div class="container" id="buscar_categoria">
+			<form action="/administrativo/produtos/buscarCategoria" th:object="${produto}" method="post">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="buscar_categoria">Buscar por Categoria</label>
+						<input type="text" class="form-control" name="buscar_categoria" id="buscar_categoria" 
+								placeholder="Categoria"/>
+						<button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+						
+						<div class="invalid-feedback">
+						</div>
+					</div>
+				</div>	
+			</form>
+		</div>
+		
+		<div class="container" id="buscar_marca">
+			<form action="/administrativo/produtos/buscarMarca" th:object="${produto}" method="post">
+				<div class="form-row">
+					<div class="form-group col-md-12">
+						<label for="buscar_marca">Buscar por Marca</label>
+						<input type="text" class="form-control" name="buscar_marca" id="buscar_marca" 
+								placeholder="marca"/>
+						<button type="submit" class="btn btn-primary btn-sm">Buscar</button>
+						
+						<div class="invalid-feedback">
+						</div>
+					</div>
+				</div>	
+			</form>
+		</div>
 
 		<div class="container">
 
@@ -35,15 +83,39 @@
 						</tr>
 					</thead>
 					<tbody>
-						<tr th:each="produto : ${listaProdutos}">
+						<tr th:each="produto : ${listaProdutos.page}">
 							<td th:text="${produto.id}"></td>
 							<td th:text="${produto.descricao}"></td>
 							<td th:text="${produto.quantidadeEstoque}"></td>
 							<td th:text="${produto.valorVenda}"></td>
-							<td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width=100/></td>
+							<td>
+								<div>
+									<div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval="2000">
+										<div class="carousel-inner">
+										  <div class="carousel-item active">
+											<img width=100 th:src="@{${'/image/ver_imagens.png'}}" alt="Exibir Imagens">
+										  </div>
+
+										  <div class="carousel-item" th:each="imagem : ${produto.getImagens()}">
+											<img width=100 th:src="@{/administrativo/produtos/mostrarImagem/{nome_imagem}(nome_imagem=${imagem.nome})}" alt="imagem do Produto">
+										  </div>
+										  
+										</div>
+										<a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+										  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+										  <span class="sr-only">Anterior</span>
+										</a>
+										<a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+										  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+										  <span class="sr-only">Próximo</span>
+										</a>
+									  </div>
+								</div>
+							</td>
+							<!-- <td><img th:src="@{/administrativo/produtos/mostrarImagem/{imagem}(imagem=${produto.nomeImagem})}" width=100/></td> -->
 
 							<td colspan="2"><a class="btn btn-info btn-sm"
-								th:href="@{/administrativo/produtos/editar/{id}(id=${produto.id})}"
+								th:href="@{/administrativo/entrada/produtos/editar/{id}(id=${produto.id})}"
 								role="button"> <span class="oi oi-brush" title="Editar"
 									aria-hidden="true"></span>
 							</a> 
@@ -73,7 +145,7 @@
 												<button type="button" class="btn btn-outline pull-left"
 													data-dismiss="modal">Fechar</button>
 												<a type="button" class="btn btn-outline"
-													th:href="@{/administrativo/produtos/remover/{id}(id=${produto.id})}"><i
+													th:href="@{/administrativo/entrada/produtos/remover/{id}(id=${produto.id})}"><i
 													class="fa fa-check"></i>&nbsp;Sim</a>
 											</div>
 										</div>
@@ -84,6 +156,28 @@
 					</tbody>
 				</table>
 			</div>
+
+			<nav aria-label="Page navigation" class="paging">
+				<ul class="pagination" th:if="${listaProdutos.page.totalPages > 1}">
+					<li class="page-item" th:classappend = "${!listaProdutos.paging.isPrevEnabled()? 'disabled' : ''}">
+						<a class="page-link" th:href="@{'/administrativo/entrada/produtos/listarPag/?pageNumber=' + ${listaProdutos.paging.pageNumber - 1}}"
+							tabindex="-1">Previous</a>
+					</li>
+					<th:block th:each="item : ${listaProdutos.paging.getItems()}">
+						<li class="page-item" th:classappend="${item.index == listaProdutos.paging.pageNumber? 'active' : ''}"
+							th:if="${item.pageItemType.name() == 'PAGE'}">
+							<a class="page-link" th:href="@{'/administrativo/entrada/produtos/listarPag/?pageNumber=' + ${item.index}}"
+								th:text="${item.index}"></a>
+						</li>
+						<li class="page-item disabled" th:if="${item.pageItemType.name() == 'DOTS'}">
+							<a class="page-link" href="#">...</a>
+						</li>
+					</th:block>
+					<li class="page-item" th:classappend="${!listaProdutos.paging.isNextEnabled() ? 'disabled' : ''}">
+						<a class="page-link" th:href="@{'/administrativo/entrada/produtos/listarPag/?pageNumber=' + ${listaProdutos.paging.pageNumber + 1}}">Next</a>
+					</li>
+				</ul>
+			</nav>
 		</div>
 	</section>
 
