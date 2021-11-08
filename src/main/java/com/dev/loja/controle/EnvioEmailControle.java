@@ -8,8 +8,6 @@ import com.dev.loja.servico.EnviarEmailServico;
 import com.dev.loja.servico.EnviarEmailTemplateServico;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -44,7 +42,7 @@ public class EnvioEmailControle {
     public String enviarEmailTemplate(){
         Map<String, Object> prop = new HashMap<String, Object>();
         prop.put("nome", "Angelica"); //usuario.nome
-        prop.put("codigo", "123456"); //usuario.senha
+        prop.put("codigo", "123456"); //usuario.codigo
 
         return enviarEmailTemplateServico.enviar(
             "angelicamizutani@gmail.com", 

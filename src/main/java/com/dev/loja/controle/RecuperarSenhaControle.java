@@ -7,6 +7,7 @@ import com.dev.loja.repositorios.FuncionarioRepositorio;
 import com.dev.loja.servico.EnviarEmailServico;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,7 +68,8 @@ public class RecuperarSenhaControle {
                 if (diff.getTime() / 1000 < 900) {
                     funcionario.setCodigoRecuperacao(null);
                     funcionario.setDataCodigo(null);
-                    funcionarioRepositorio.save(funcionario);
+                    funcionario.setSenha(new BCryptPasswordEncoder().encode(senha));
+                    funcionarioRepositorio.saveAndFlush(funcionario);
                     model.addAttribute("mensagem", "Senha alterada com sucesso!");
 
                     return "email/mensagem";
