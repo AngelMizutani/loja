@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Cadastrar Senha</title>
+    </head>
+
+    <body>
+        <div class="container" style="padding: 20px">
+            <form method="post" action="/cadastrarSenha">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="email" 
+                            name="email"
+                            placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <label for="codigo">Código</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="codigo" 
+                            name="codigo"
+                            placeholder="Código">
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <input type="text" 
+                            class="form-control" 
+                            id="senha" 
+                            name="senha"
+                            placeholder="Senha">
+                </div>
+                <button type="submit" class="btn btn-primary">Cadastrar Senha</button>
+            </form>
+            <br/>
+            <p id="resultado"></p>
+        </div>
+    </body>
+</html>
