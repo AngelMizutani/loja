@@ -87,7 +87,7 @@ body {
  */
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
 	color: #fff;
-	background-color: #1e94d2;
+	background-color: hsl(0, 0%, 46%);;
 }
 
 /*
@@ -117,4 +117,16 @@ body {
 	display: block;
 	color: #777777;
 	text-align: center;
+}
+
+.dashboard{
+    border-width: 2px;
+    border-style:double; 
+    border-color: hsl(0, 0%, 46%);
+    margin: 10px;
+    max-width: fit-content;
+}
+
+.dashboard img{
+    width: 500px;
 }
