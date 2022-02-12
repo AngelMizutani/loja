@@ -46,14 +46,14 @@ public class Produto implements Serializable{
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "produto")
 	private List<Imagem> imagens = new ArrayList<>();
 
-	// private String nomeImagem;
+	private String nomeImagem;
 
-	// public String getNomeImagem() {
-	// 	return nomeImagem;
-	// }
-	// public void setNomeImagem(String nomeImagem) {
-	// 	this.nomeImagem = nomeImagem;
-	// }
+	public String getNomeImagem() {
+		return nomeImagem;
+	}
+	public void setNomeImagem(String nomeImagem) {
+		this.nomeImagem = nomeImagem;
+	}
 	public Long getId() {
 		return id;
 	}
