@@ -8,11 +8,11 @@
 </head>
 
 <body>
-    
-	<!-- Page Content -->
-	<div class="container" layout:fragment="corpo">
 
-		<div class="row">
+    <!-- Page Content -->
+    <div class="container" layout:fragment="corpo">
+
+        <div class="row">
             <div class="col-12">
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -22,29 +22,40 @@
                                 <th scope="col">Produto</th>
                                 <th scope="col">Estoque</th>
                                 <th scope="col" class="text-center">Quantidade</th>
-                                <th scope="col" class="text-right">Preço</th>
+                                <th scope="col" class="text-right">Valor Unitário</th>
+                                <th scope="col" class="text-right">Valor Total</th>
                                 <th> </th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr th:each="item : ${listaItens}">
                                 <td><img src="https://dummyimage.com/50x50/55595c/fff" /> </td>
-                                <td>Product Name Dada</td>
-                                <td>In stock</td>
+                                <td th:text="${item.produto.descricao}"></td>
+                                <td>Em estoque</td>
                                 <td>
-                                    10 &nbsp;&nbsp;
-                                    <button class="btn btn-sm btn-dark">
-                                        <i class="fa fa-plus"></i> 
-                                    </button>
+                                    <span th:text="${item.quantidade}"></span>
+                                    &nbsp;&nbsp;
+                                    <a class="btn btn-sm btn-dark"
+                                        th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id}, acao=${1})}" 
+                                        role="button"><i class="fa fa-plus"></i></a>
                                     &nbsp;
-                                    <button class="btn btn-sm btn-dark">
-                                        <i class="fa fa-minus"></i> 
-                                    </button>
+                                    <a class="btn btn-sm btn-dark"
+                                        th:href="@{/alterarQuantidade/{id}/{acao}(id=${item.produto.id}, acao=${0})}"
+                                        role="button"><i class="fa fa-minus"></i></a>
+
                                 </td>
-                                <td class="text-right">124,90 €</td>
-                                <td class="text-right"><button class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> </td>
+                                <td class="text-right" th:text="${item.valorUnitario}"></td>
+                                <td class="text-right" th:text="${item.valorTotal}"></td>
+                                
+                                <td class="text-right">
+                                    <a class="btn btn-sm btn-danger"
+                                        th:href="@{/removerProduto/{id}(id=${item.produto.id})}"
+                                        role="button">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
                             </tr>
-                            
+
                             <tr>
                                 <td></td>
                                 <td></td>
@@ -83,13 +94,13 @@
                     </div>
                 </div>
             </div>
-			
 
-		</div>
-		<!-- /.row -->
 
-	</div>
-	<!-- /.container -->
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
 
 </body>
 
