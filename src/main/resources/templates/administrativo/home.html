@@ -8,6 +8,16 @@
 <body>
 			
 	<section class="layout-content" layout:fragment="corpo">
+
+        <div class="row">
+            <div class="col-md-6 botao-relatorio">
+                <a class="btn btn-outline-dark btn-md btn-block" th:href="@{/administrativo/relatorioProduto}" role="button">Ver Produtos em Estoque</a>
+            </div>
+
+            <div class="col-md-6 botao-relatorio">
+                <a class="btn btn-outline-dark btn-md btn-block" th:href="@{/administrativo/relatorioVendas}" role="button">Ver Relatório de Vendas</a>
+            </div>
+        </div>
 	
 		<nav class="navbar navbar-expand-md bg-light">
 			<div class="collapse navbar-collapse" id="navbarsExampleDefault">
